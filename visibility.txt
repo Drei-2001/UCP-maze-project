@@ -1,0 +1,73 @@
+Name:   Andrei Vann nthony A. Bedruz
+Student Number: 20211617
+Course: Bachelor of Computing
+Unit:   Unix C and Programming
+
+
+Program design
+
+The overall program of maze.exe is divided into multiple c files and their designated headers, where 
+each c file contains one or more functions that correlate to one another.
+
+MAIN.C/MAIN.H
+
+main.c and its desginated header stores the main function that enables the interaction of all the other c files with each other. This prompts the user interface, and 
+allows the game to be compiled into maze.exe. This is where both the metaDataArray and the map array is declared, where the former stores the information of the object
+in the array, and the latter stores the dimension of the array for printing. 
+
+Firstly, the whole terminal is cleared before printing the initial map containing all the data that was retrieved from the metaData array, which was retrieved from the 
+getMetaData function from map.c. This is when metaToMap is called. FindChar is then called to initialize the values of the rows and columns of both player and goal. These 
+int values are then compared to one another in a while loop. While both the rows and columns of the player and the end goal are different, print the map and grab the input 
+of the user. using the movePlayer function from the movement.c file, the playerRow and playerCol integers are updated, as well as the position of the player in the map. The loop
+then breaks when reaching the end goal, outputting the map one final time to show that the player has reached the end goal, and followed by a Congratulatory message.
+
+MAP.C/MAP.H
+
+map.c and its designated header stores the getmetadata function, which overwrites what should be the metaDataArray that would be firstly declared in the main.c function.
+the map.c array can be changed manually to store objects such as the walls, the player, and the end goal. Assuming that there is only one end goal and one player object, 
+information about the objects placement in the grid is essentially stored in this array through the manipulation of the metaDataArray itself.
+
+MOVEMENT.C/MOVEMENT.H 
+
+movement.c and its designated header stores the movement of the player amongst the presumably initialized map. There are two functions in this c file: findChar and movePlayer.
+
+findChar find the first specific character that is included in the parameter, and searches for it in the  initialized map. Note that this will only work effectively for the player
+and the end Goal object (character 'x' and character '^','v','>', and '<') as there is only one of each in the map. If a wall was used as a parameter, then the first wall found in the map will be used instead. The parameter for the rows and
+column of the designated character (e.g. 'x' por '^') needs to be passed as well, which will then be changed and updated when declared in the main function. This is used for finding 
+or resetting the character position in the map.
+
+The other function is called movePlayer, and changes the values of the player's row and player's column in the map. It utilizes a switch case to find the player's input(which is amongst
+the parameters) and through that input moves the player accordingly in the map. The rows and the column position of the player will be updated in the map, and the previous postion of the 
+player will be changed into a blank space.
+
+TERMINAL.C/TERMINAL.H
+
+terminal.c and its designated header changes the buffer capabilities of the terminal. Essentially, updating it so that when an input is found, it will automatically go through without the input of the 
+enter button. It is provided for easy input.
+
+TABLE.C/TABLE.H 
+
+table.c and its desginated header includes all the functions relating to the arrays used in the program, such as metaData array and the map array. There are six functions in total in this c file.
+
+The getMap function takes the rows and columns parameter and creates a designated map without any objects in it. It illustrates the basic shape of the map first. It returns a 2D array of the map.
+
+The printMap and printMetaDataTable functions prints the desginated 2D array.
+
+The metaToMap function is the main function that merges the data from the map that is created and the metaData array that would be initialized from the main function. It loops through the metaData array
+and depending on the value of the integer, the map will then point that object to the designated rows and columns. Note that this will return a new map that has all the objects from the metadata array, therefore
+the initialization of the metaData array needs to come first.
+
+And lastly, the functions to free both malloc arrays, freeMetaData and freeMap.
+
+TEST FUNCTIONS 
+
+the test functions are there for testing purposes only. Does not have to be compiled with the rest of the program.
+
+VISIBLITY.C/ VISIBLITY.H (MISSING/ INCOMPLETE)
+
+The visibility.c and visibility.h program was not implemented with the maze.exe file. It would've been implemented to increase the difficulty of the maze by lessening the visiblity of the player depending on the command line argument when
+the file is executed.
+
+A way to do this is calling a function, which has the address of the map and call out the findChar function within it, finding the position of the player. Also having the visibility as a parameter, starting from the position of the player,
+only print out x amount of objects in front, where x is the visibility in integers. 
+
